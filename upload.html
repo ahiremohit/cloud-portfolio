@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud Storage | CyberSec Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .upload-container {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .upload-container h1 {
+            color: #00f0ff;
+            margin-bottom: 20px;
+            font-size: 38px;
+        }
+
+        .upload-container p {
+            color: #cbd5e1;
+            margin-bottom: 40px;
+        }
+
+        .drop-zone {
+            width: 400px;
+            max-width: 90%;
+            margin: auto;
+            padding: 50px;
+            border: 2px dashed #00f0ff;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            background: #1e293b;
+            box-shadow: 0 0 30px rgba(0,240,255,0.4);
+        }
+
+        .drop-zone.dragover {
+            background: #0ea5e9;
+            border-color: white;
+        }
+
+        .drop-zone input {
+            display: none;
+        }
+
+        .drop-zone-text {
+            font-size: 18px;
+            color: #cbd5e1;
+        }
+
+        .upload-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: #00f0ff;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #00c3cc;
+            transform: scale(1.05);
+        }
+
+        #previewImage {
+            margin-top: 30px;
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,240,255,0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">CyberSec Portfolio</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="upload.html">Cloud Storage</a></li>
+    </ul>
+</nav>
+
+<div class="upload-container">
+    <h1>Cloud Storage Upload</h1>
+    <p>Drag & Drop images directly to secure cloud storage.</p>
+
+    <div class="drop-zone" id="dropZone">
+        <span class="drop-zone-text">Drag & Drop Image Here<br>or Click to Select</span>
+        <input type="file" id="fileInput" accept="image/*">
+    </div>
+
+    <button class="upload-btn" onclick="uploadImage()">Upload to Cloud</button>
+
+    <img id="previewImage">
+</div>
+
+<script>
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+let selectedFile = null;
+
+dropZone.addEventListener("click", () => fileInput.click());
+
+fileInput.addEventListener("change", (e) => {
+    selectedFile = e.target.files[0];
+    previewFile(selectedFile);
+});
+
+dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+});
+
+dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+    selectedFile = e.dataTransfer.files[0];
+    previewFile(selectedFile);
+});
+
+function previewFile(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById("previewImage").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function uploadImage() {
+    if (!selectedFile) {
+        alert("Select an image first.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("upload_preset", "portfolio_upload");
+
+    fetch("https://api.cloudinary.com/v1_1/dhzkl1whh/image/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("previewImage").src = data.secure_url;
+        alert("Upload Successful!");
+    })
+    .catch(error => {
+        alert("Upload Failed!");
+        console.error(error);
+    });
+}
+</script>
+
+</body>
+</html>

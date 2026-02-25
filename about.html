@@ -1,9 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>About Me</title>
+    <title>About Me | CyberSec Portfolio</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h1 {
+            font-size: 42px;
+            color: #00f0ff;
+            margin-bottom: 15px;
+        }
+
+        .about-header p {
+            font-size: 18px;
+            color: #cbd5e1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .about-box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,240,255,0.1);
+        }
+
+        .about-box h2 {
+            color: #00f0ff;
+            margin-bottom: 15px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #0ea5e9;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <nav>
@@ -12,29 +81,56 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="upload.html">Cloud Storage</a></li>
     </ul>
 </nav>
 
-<section class="content">
-    <h1 class="big-name">Mohit Harshada Prathmesh</h1>
-    <h3 class="subtitle">Cybersecurity Enthusiast | Ethical Hacking | Cloud Security</h3>
+<div class="about-container">
 
-    <p>
-        I am an aspiring Cybersecurity Professional focused on protecting systems,
-        identifying vulnerabilities, and strengthening cloud-based infrastructures.
-        I have strong interest in ethical hacking, network defense, and security risk analysis.
-    </p>
+    <div class="about-header">
+        <h1>Mohit Harshada Prathmesh</h1>
+        <p>Cybersecurity & Cloud Security Enthusiast</p>
+    </div>
 
-    <p>
-        This portfolio website is deployed on a cloud hosting platform,
-        demonstrating practical implementation of cloud computing concepts
-        such as global accessibility, scalability, and high availability.
-    </p>
-</section>
+    <div class="about-content">
 
-<footer>
-    <p>© 2026 Cybersecurity Portfolio</p>
+        <div class="about-box">
+            <h2>Professional Profile</h2>
+            <p>
+                Cybersecurity-focused engineering student with hands-on experience in
+                cloud deployment, secure file handling, and API integration.
+                Built and deployed a cloud-integrated portfolio using GitHub,
+                Netlify, and Cloudinary to demonstrate real-world cloud concepts.
+            </p>
+
+            <p>
+                Strong interest in ethical hacking, vulnerability assessment,
+                and securing cloud-based infrastructures. Continuously learning
+                and building practical security-oriented projects.
+            </p>
+        </div>
+
+        <div class="about-box">
+            <h2>Core Competencies</h2>
+
+            <div class="skills">
+                <div class="skill-tag">Network Security</div>
+                <div class="skill-tag">Cloud Deployment</div>
+                <div class="skill-tag">API Integration</div>
+                <div class="skill-tag">Ethical Hacking Basics</div>
+                <div class="skill-tag">Git Version Control</div>
+                <div class="skill-tag">Linux Environment</div>
+                <div class="skill-tag">Web Hosting (Netlify)</div>
+                <div class="skill-tag">Cloud Storage Integration</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer style="text-align:center; padding:30px; background:#020617; margin-top:60px;">
+    © 2026 Cybersecurity Portfolio
 </footer>
 
 </body>
